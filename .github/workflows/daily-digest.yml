@@ -117,7 +117,7 @@ jobs:
         id: health
         run: |
           set +e
-          python3 health_check.py --wechat-smoke --account "晚点再听LaterCast"
+          python3 health_check.py --wechat-smoke
           rc=$?
           set -e
           if [ "$rc" = "42" ]; then
@@ -127,14 +127,6 @@ jobs:
             exit 0
           fi
           exit $rc
-
-      - name: Refresh Cubox favorites (non-blocking)
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.mode != 'smoke' }}
-        run: python3 cubox_client.py || echo "cubox fetch failed, continuing with local cache"
-
-      - name: Source evolve (non-blocking)
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.mode != 'smoke' }}
-        run: python3 source_evolve.py --apply || echo "source_evolve failed, continuing"
 
       - name: Run wechat-radar
         if: steps.health.outputs.rate_limited != 'true'
@@ -157,6 +149,15 @@ jobs:
             exit 0
           fi
           exit $rc
+
+      - name: Upload text knowledge cards
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zhishan-knowledge-cards-${{ github.run_id }}
+          path: knowledge_cards/
+          if-no-files-found: ignore
+          retention-days: 30
 
       - name: Save state cache
         if: always()

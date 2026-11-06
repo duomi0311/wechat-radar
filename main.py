@@ -43,6 +43,7 @@ from notifier import (
     notify_rate_limited as _notify_rate_limited,
 )
 from run_state import RunState, retry_call
+from knowledge_cards import generate_card, write_cards
 
 # ──────────────────────────────────────────────
 # 日志配置
@@ -165,8 +166,7 @@ def run(test_mode: bool = False, dry_run: bool = False):
             try:
                 fakeid = retry_call("fetch", run_state, get_fakeid, account_name, retries=3)
                 if not fakeid:
-                    logger.warning(f"Skipping {account_name}: cannot find fakeid")
-                    continue
+                    raise ValueError(f"无法确认公众号：{account_name}；请核对名称或提供原文链接")
 
                 articles = retry_call("fetch", run_state, get_recent_articles, fakeid, account_name, hours=fetch_hours, retries=3)
             except RateLimitError as exc:
@@ -343,6 +343,16 @@ def run(test_mode: bool = False, dry_run: bool = False):
             })
 
         intro = ""
+        if config.get("knowledge_cards", {}).get("enabled", False):
+            cards = []
+            for r in recommended:
+                original = next(a for a in all_articles if a.get("url") == r["url"])
+                cards.append(retry_call(
+                    "newsletter_generate", run_state, generate_card,
+                    original, original["text"], config, retries=3,
+                ))
+            paths = write_cards(cards, _script_dir / "knowledge_cards")
+            logger.info("Knowledge cards saved: %s", ", ".join(str(p) for p in paths))
         if push_articles:
             logger.info("Generating newsletter intro...")
             intro = retry_call("newsletter_generate", run_state, generate_intro, push_articles, config=config, retries=3)

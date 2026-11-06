@@ -421,7 +421,7 @@ def generate_intro(articles: list[dict], config: dict = None) -> str:
     return _call_ai_raw(messages, temperature=intro_temperature)
 
 
-def _call_ai_raw(messages: list[dict], temperature: float = 0.5) -> str:
+def _call_ai_raw(messages: list[dict], temperature: float = 0.5, max_tokens: int = 200) -> str:
     """直接调用 AI 获取原始文本（不做 JSON 解析）"""
     provider = os.getenv("AI_PROVIDER", "anthropic").lower()
     try:
@@ -437,7 +437,7 @@ def _call_ai_raw(messages: list[dict], temperature: float = 0.5) -> str:
             client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
             model = os.getenv("ANTHROPIC_MODEL", "claude-haiku-4-5-20251001")
             response = client.messages.create(
-                model=model, max_tokens=200, system=system_content, messages=user_messages,
+                model=model, max_tokens=max_tokens, system=system_content, messages=user_messages,
             )
             return response.content[0].text.strip()
         else:
@@ -448,7 +448,7 @@ def _call_ai_raw(messages: list[dict], temperature: float = 0.5) -> str:
             )
             model = os.getenv("AI_MODEL", "gpt-4o-mini")
             response = client.chat.completions.create(
-                model=model, messages=messages, max_tokens=200, temperature=temperature,
+                model=model, messages=messages, max_tokens=max_tokens, temperature=temperature,
             )
             return response.choices[0].message.content.strip()
     except Exception as e:
