@@ -1,5 +1,29 @@
 # 知山 · 法律公众号阅读与知识卡
 
+## 使用ChatGPT/Codex整理，不配置AI API
+
+在可访问微信公众平台的电脑上使用本分支。Windows项目目录建议为
+`D:\多米的codex\wechat-radar`，虚拟环境也放在项目目录内。
+
+```bash
+python -m pip install -r requirements.txt
+python collect_articles.py --login
+python collect_articles.py --smoke
+python collect_articles.py
+```
+
+登录二维码在项目的 `login_temp/wechat_qr.png`，若未自动打开可手动查看扫码。
+需要使用有微信公众号后台权限的微信账号确认。扫码凭据保存在项目的 `token.json`，
+不要上传此登录文件。上述采集入口无需AI密钥或推送渠道，不会发邮件或消息。
+
+`--smoke`依次检查所有指定账号近14天的文章元数据，不拉正文。
+通过后完整采集默认近24小时文章；结果保存为 `collected_articles/articles-时间.json`。
+将该JSON交给ChatGPT/Codex即可整理文字知识卡，无需在项目内调用AI API。
+项目不将JSON自动送进ChatGPT；每日自动采集、持久化存储及定时整理尚待配置。
+
+当前云端直接请求微信登录接口返回HTTP 405，未能取得二维码；电脑端登录仍需实际验证。
+这不代表你已经登录失败，也不能据此断定本机一定可用。
+
 ## 已配置
 
 监控名称：山东高法、上海一中法院、天同诉讼圈、icourt法秀、北大法宝、高杉LEGAL。
