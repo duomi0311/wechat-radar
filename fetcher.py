@@ -4,6 +4,7 @@ fetcher.py - 从微信公众号官方 API 拉取文章
 """
 import json
 import logging
+import re
 import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -152,19 +153,17 @@ def get_fakeid(account_name: str) -> Optional[str]:
 
     # 优先精确匹配 nickname
     for item in items:
-        if item.get("nickname") == account_name:
+        if re.sub(r"\s+", "", item.get("nickname", "")).casefold() == re.sub(r"\s+", "", account_name).casefold():
             fakeid = item.get("fakeid")
             logger.info(f"Found exact match for '{account_name}': fakeid={fakeid}")
             cache[account_name] = fakeid
             _save_fakeid_cache(cache)
             return fakeid
 
-    # 回退：取第一条
-    fakeid = items[0].get("fakeid")
-    logger.info(f"No exact match for '{account_name}', using first result: fakeid={fakeid}")
-    cache[account_name] = fakeid
-    _save_fakeid_cache(cache)
-    return fakeid
+    # 不选择相似名称，避免监控到同名或仿冒账号。
+    logger.error("No exact match for %r; candidates=%s", account_name,
+                 [item.get("nickname", "") for item in items])
+    return None
 
 
 def _load_article_cache() -> dict:

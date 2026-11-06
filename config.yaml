@@ -1,172 +1,73 @@
+# 监控名单按用户提供名称填写；扫码后须逐一验证账号。
 accounts:
-  # 添加你想关注的微信公众号名称，每行一个
-  # 以下是一份精选的 48 个 AI / 科技 / 创投方向优质公众号，可直接使用或自行增删
-  - 虎嗅APP
-  - 晚点LatePost
-  - 机器之心
-  - 少数派
-  - 卫夕指北
-  - 智能涌现
-  - 硅星人Pro
-  - APPSO
-  - InfoQ
-  - Founder Park
-  - 42章经
-  - MacTalk
-  - 孤独大脑
-  - 笔记侠
-  - 有新Newin
-  - AI寒武纪
-  - AI工程化
-  - 赛博禅心
-  - 经纬创投
-  - 红杉汇
-  - 真格基金
-  - 创新工场
-  - 奇绩创坛
-  - Z Potentials
-  - caoz的梦呓
-  - 望月的博客
-  - 花叔
-  - 特工宇宙
-  - 潜云思绪
-  - 牛村木木山
-  - Stablehunter
-  - 我思故我在
-  - 张晓东西南北
-  - 郎瀚威 Will
-  - AI产品阿颖
-  - 卓哥投研笔记
-  - 猫猫头的日记
-  - 数字生命卡兹克
-  - P-Hunt内容速览
-  - 无界社区 mixlab
-  - AI Reinvent
-  - Draco正在VibeCoding
-  - AkashaBot
-  - 十字路口Crossing
-  - 豪大说
-  - 随机小分队
-  - AI Hacker House
-  # ── Cathy 新增 2026-06-24 ──
-  - 葬AI
-  - 腾讯研究院
-  - 赵纯想
-  - 小头MUJI
-  - Qoder
-  - 闲庭落木
-  - 刘小排r
-  - Wh1isperBlog
-  - 锦秋集
-  - 宝玉AI
-  - 手工川
-  - 这不是AI写的
-  - 晚点再听LaterCast
-  - 思维摩托
-  - FateTell
-
+- 山东高法
+- 上海一中法院
+- 天同诉讼圈
+- icourt法秀
+- 北大法宝
+- 高杉LEGAL
 profile:
-  background: "资深产品经理，前滴滴国际化 PM（Fintech 支付 / 出行场景），2026 年转向 AI、仍做产品；即将入职做 ToB 方向的 Agent AI 产品。INTP，刻意训练第一性原理思考。"
-  expertise_level: advanced  # beginner / intermediate / advanced
+  background: 关注法律实务、民商事诉讼与知识积累的专业读者
+  expertise_level: advanced
   interests:
-    - ToB / 企业级 Agent 产品
-    - ToC AI 产品
-    - AI 产品设计与方法论
-    - AI native 的组织与协同方式变化
-    - AI 时代 PM 的业务理解 × 技术认知
-    - Agent / LLM 技术原理与工程实践
-    - 深度思考 / 逻辑严谨 / 第一性原理
+  - 民商事裁判规则与案例评析
+  - 证据、举证责任与庭审实务
+  - 民事程序、执行与财产保全
+  - 合同、公司、担保及商事争议
+  - 法律检索、诉讼方法与律师工作工具
   preferences:
-    prefer_practical: true       # 偏好实操内容
-    avoid_marketing_hype: true   # 过滤营销软文
-  custom: |
-    我是产品经理出身，看内容是产品视角：最看重「能不能影响我对产品的判断和行动」。
-    特别想看：
-    - 有深度、有独到洞察、逻辑严谨的内容；第一性原理式的拆解，而非表层资讯罗列。
-    - ToB / ToC AI 产品的真实拆解、设计决策与一手实践（尤其 Agent 类产品）。
-    - AI native 的组织协同、工作方式变化。
-    - 把「业务理解」和「技术认知」结合起来谈的内容；能把技术原理讲清楚、帮 PM 建立技术判断力的。
-    不太想看：
-    - 浅层资讯罗列、蹭热点的口水文、营销软文。
-    - 纯情绪 / 焦虑贩卖、标题党、没有信息增量的内容。
-
+    prefer_practical: true
+    avoid_marketing_hype: true
+  custom: 优先选择可积累的法律知识、具体裁判规则、证据方法和诉讼技巧。区分法律规定、法院个案观点与作者评论；保留原文的适用条件、例外和时间地域限制。未核实的案号、法条及现行有效性须标明待核实，不补造内容。活动通知、招聘、营销和纯新闻降低推荐优先级。
 preferences:
-  # 合并模式: memory_only | custom_only | memory+custom
   merge_mode: custom_only
-
-  # 来源1: 读取 memory 文件，自动提取偏好相关段落（可选）
   memory_files: []
-
-  # 来源2: 自定义补充
-  custom: |
-    # 补充偏好（可选）
-
+  custom: 围绕指定六个公众号开展法律实务学习。内容准确、来源清楚、逻辑克制；无需每天凑数。
 fetch:
-  hours: 24             # 抓取最近 N 小时内的文章
-  request_interval: 1.5 # 每次微信 API 请求间隔（秒），避免频率限制
-
+  hours: 24
+  request_interval: 1.5
 branding:
-  title: "微信公众号日报"           # 日报标题，会出现在所有推送渠道
-  footer: "由 wechat-radar 自动生成" # 邮件页脚署名
-  # banner: "assets/banner.png"    # 邮件 banner 头图路径（相对于项目目录或绝对路径），默认 assets/banner.png
-
+  title: 知山 · 法律实务阅读
+  footer: 知山｜原文学习整理，保留来源，待人工核验
 ai:
-  temperature: 0.3        # 评分 AI 温度（越低越稳定）
-  intro_temperature: 0.5  # 开场白 AI 温度（越高越有创意）
-  max_content_length: 4000  # 送入 AI 评分的正文最大字符数
-  min_content_length: 50    # 正文少于此字数则跳过 AI 评分
-  # intro_style: |         # 自定义开场白风格提示（取消注释后覆盖默认）
-  #   像朋友聊天一样，挑一个最有意思的点展开
-
+  temperature: 0.3
+  intro_temperature: 0.5
+  max_content_length: 12000
+  min_content_length: 50
+  intro_style: 清晰克制地指出本次阅读涉及的具体法律争点。不将文章观点表述为已核实的现行法律，不使用夸张宣传或空泛抒情。
 dedup:
-  title_threshold: 0.5    # 标题相似度阈值（0-1，越高越严格）
-
+  title_threshold: 0.5
 prefilter:
-  # 技术白名单：标题含这些关键词的文章不会被预过滤掉（正则，不区分大小写）
   tech_whitelist:
-    - "GPT|GLM|Claude|Gemini|Llama|Qwen|DeepSeek"
-    - "大模型|LLM|AI|人工智能|开源|模型|算法|Token|Agent|RAG"
-    - "芯片|GPU|CUDA|Transformer|微调|Fine.?tune|Embedding"
-  # 广告关键词组合（同时命中才过滤）
+  - 裁判|判决|司法解释|民法典|举证|证据|诉讼|保全|执行|管辖|合同|公司|担保
   ad_rules:
-    - trigger: "限时"
-      keywords: "折扣|优惠|特价|秒杀|抢购"
-    - trigger: "免费领"
-      keywords: "课程|资料|电子书|模板|工具包"
-
+  - trigger: 限时
+    keywords: 折扣|优惠|特价|秒杀|抢购
+  - trigger: 免费领
+    keywords: 课程|资料|电子书|模板|工具包
 schedule:
   cron:
-    - "0 9 * * *"    # 每天 09:00（实际调度在 GitHub Actions，此处仅供本地 --setup-cron 参考）
+  - 0 9 * * *
   log_file: /tmp/wechat-radar.log
-
 scoring:
-  # 评分维度：name + description + weight
-  # 默认启用 4 个核心维度，可按需增删
   dimensions:
     relevance:
-      description: "与用户兴趣的相关度（1=完全无关，10=高度匹配）"
+      description: 与民商事诉讼、裁判规则、证据及法律实务学习的相关度
       weight: 2
     depth:
-      description: "思考深度（1=标题党/无内容，10=有独到洞察、商业框架、一手经验或深度调研）"
+      description: 是否说明裁判理由、法律争点、适用条件与例外，而非只报结论
       weight: 1
     info_density:
-      description: "信息密度（1=水文/大量废话，10=全篇干货）"
+      description: 可核查规则、案件事实与具体方法的信息密度
       weight: 1
     actionability:
-      description: "可行动性（1=纯闲聊/纯资讯，10=读完能影响决策、启发行动方向）"
+      description: 能否形成检索、举证、庭审或办案核对步骤
       weight: 2
-    # ── 以下为可选维度，取消注释即可启用 ──
-    # originality:
-    #   description: "原创性（1=纯转载搬运，10=独家信息、一手数据、原创研究）"
-    #   weight: 1
-    # timeliness:
-    #   description: "时效性（1=旧闻/常识，10=热点事件、最新发布、第一时间报道）"
-    #   weight: 1
-    # credibility:
-    #   description: "可信度（1=无来源/道听途说，10=权威来源、有数据支撑、可验证）"
-    #   weight: 1
-    # entertainment:
-    #   description: "趣味性（1=枯燥乏味，10=故事性强、引人入胜、有传播力）"
-    #   weight: 1
+    credibility:
+      description: 是否清楚列明出处、案号或法律依据，并区分个案、规则与评论
+      weight: 1
   min_score: 5
   top_n: 12
+knowledge_cards:
+  enabled: true
+  max_content_length: 20000
